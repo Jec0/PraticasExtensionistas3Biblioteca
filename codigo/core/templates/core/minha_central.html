@@ -1,0 +1,68 @@
+{% extends "core/base.html" %}
+{% block title %}Minha Central - {{ config.nome }}{% endblock %}
+{% block content %}
+<h1>Minha Central</h1>
+
+<div class="linha-stats">
+  <div class="stat"><b>{{ lidos|length }}</b><span>Livros lidos</span></div>
+  <div class="stat"><b>{{ lendo|length }}</b><span>Lendo agora</span></div>
+  <div class="stat"><b>{{ fila|length }}</b><span>Na fila</span></div>
+  <div class="stat"><b>{{ favoritos|length }}</b><span>Favoritos</span></div>
+  <div class="stat"><b>{% if nota_media %}{{ nota_media }}★{% else %}-{% endif %}</b><span>Sua nota média</span></div>
+</div>
+
+<h2>Lendo agora</h2>
+{% if lendo %}
+  <div class="grade-livros">
+    {% for i in lendo %}{% include "core/_card_livro.html" with livro=i.livro interacao=i %}{% endfor %}
+  </div>
+{% else %}
+  <p class="vazio">Nenhum livro em leitura. <a href="{% url 'acervo' %}">Escolha o próximo no acervo</a>.</p>
+{% endif %}
+
+<h2>Fila de leitura</h2>
+{% if fila %}
+  <div class="grade-livros">
+    {% for i in fila %}{% include "core/_card_livro.html" with livro=i.livro interacao=i %}{% endfor %}
+  </div>
+{% else %}
+  <p class="vazio">Sua fila está vazia. Adicione livros pelo acervo.</p>
+{% endif %}
+
+<h2>Já li</h2>
+{% if lidos %}
+  <div class="grade-livros">
+    {% for i in lidos %}{% include "core/_card_livro.html" with livro=i.livro interacao=i %}{% endfor %}
+  </div>
+{% else %}
+  <p class="vazio">Você ainda não marcou nenhum livro como lido.</p>
+{% endif %}
+
+<h2>Favoritos</h2>
+{% if favoritos %}
+  <div class="grade-livros">
+    {% for i in favoritos %}{% include "core/_card_livro.html" with livro=i.livro interacao=None %}{% endfor %}
+  </div>
+{% else %}
+  <p class="vazio">Nenhum favorito ainda.</p>
+{% endif %}
+
+<h2>Minhas avaliações</h2>
+{% if avaliacoes %}
+  <div class="card">
+    <table>
+      <tr><th>Livro</th><th>Nota</th><th>Resenha</th><th>Atualizado</th></tr>
+      {% for i in avaliacoes %}
+        <tr>
+          <td><a href="{% url 'livro_detalhe' i.livro.pk %}">{{ i.livro.titulo }}</a></td>
+          <td><span class="estrelas">{% for n in "12345" %}{% if i.avaliacao >= forloop.counter %}★{% else %}<span class="vazia">★</span>{% endif %}{% endfor %}</span></td>
+          <td>{{ i.resenha|truncatechars:80|default:"-" }}</td>
+          <td>{{ i.atualizado_em|date:"d/m/Y" }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% else %}
+  <p class="vazio">Você ainda não avaliou nenhum livro.</p>
+{% endif %}
+{% endblock %}

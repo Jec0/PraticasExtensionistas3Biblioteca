@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+{% block title %}Personalização - {{ config.nome }}{% endblock %}
+{% block content %}
+<div class="card" style="max-width:640px">
+  <h1 style="margin-bottom:1rem">Personalização da biblioteca</h1>
+  <p style="font-family:system-ui;font-size:.88rem;color:var(--cinza);margin-bottom:1.2rem">
+    Nome, logo, cores e textos exibidos no sistema. As alterações valem para todos os usuários.
+  </p>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">Salvar personalização</button>
+  </form>
+</div>
+
+<div class="card" style="max-width:640px">
+  <h2 style="margin-top:0">Pré-visualização das cores</h2>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;font-family:system-ui;font-size:.8rem;text-align:center">
+    <div><div style="width:90px;height:56px;border-radius:6px;background:var(--primaria);border:1px solid var(--borda)"></div>Primária</div>
+    <div><div style="width:90px;height:56px;border-radius:6px;background:var(--primaria-escura);border:1px solid var(--borda)"></div>Primária escura*</div>
+    <div><div style="width:90px;height:56px;border-radius:6px;background:var(--primaria-clara);border:1px solid var(--borda)"></div>Primária clara*</div>
+    <div><div style="width:90px;height:56px;border-radius:6px;background:var(--destaque);border:1px solid var(--borda)"></div>Destaque</div>
+    <div><div style="width:90px;height:56px;border-radius:6px;background:var(--fundo);border:1px solid var(--borda)"></div>Fundo</div>
+  </div>
+  <p style="font-family:system-ui;font-size:.78rem;color:var(--cinza);margin-top:.8rem">* Geradas automaticamente a partir da cor primária.</p>
+</div>
+{% endblock %}

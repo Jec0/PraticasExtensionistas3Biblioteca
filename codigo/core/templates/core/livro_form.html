@@ -1,14 +1,17 @@
 {% extends "core/base.html" %}
-{% block title %}{% if livro %}Editar{% else %}Novo{% endif %} livro - Biblioteca{% endblock %}
+{% block title %}{% if livro %}Editar{% else %}Novo{% endif %} livro - {{ config.nome }}{% endblock %}
 {% block content %}
-<div class="card" style="max-width:520px">
+<div class="card" style="max-width:640px">
   <h1 style="margin-bottom:1rem">{% if livro %}Editar livro{% else %}Novo livro{% endif %}</h1>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button class="btn" type="submit">Salvar</button>
     <a class="btn secondary" href="{% url 'livro_list' %}">Cancelar</a>
   </form>
-  <p style="margin-top:.8rem;font-size:.85rem;color:#666">Cadastre autores na tela de <a href="{% url 'autor_list' %}">Autores</a> se a lista estiver vazia.</p>
+  <p style="margin-top:.8rem;font-size:.85rem;color:#666">
+    Dica: você pode enviar a capa como arquivo ou informar apenas a URL de uma imagem.
+    Cadastre autores em <a href="{% url 'autor_list' %}">Autores</a> e categorias em <a href="{% url 'categoria_list' %}">Categorias</a>.
+  </p>
 </div>
 {% endblock %}

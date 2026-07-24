@@ -1,8 +1,8 @@
 {% extends "core/base.html" %}
-{% block title %}Autores - Biblioteca{% endblock %}
+{% block title %}Autores - {{ config.nome }}{% endblock %}
 {% block content %}
 <div class="card">
-  <h1 style="margin-bottom:1rem">Autores</h1>
+  <h1 style="margin-bottom:1rem">Autores ({{ autores|length }})</h1>
   <p style="margin-bottom:1rem"><a class="btn" href="{% url 'autor_novo' %}">+ Novo autor</a></p>
   <table>
     <tr><th>Nome</th><th>Livros</th><th></th></tr>
@@ -11,8 +11,8 @@
       <td>{{ autor.nome }}</td>
       <td>{{ autor.livros.all|join:", "|default:"-" }}</td>
       <td class="actions">
-        <a class="btn secondary" href="{% url 'autor_editar' autor.pk %}">Editar</a>
-        <a class="btn danger" href="{% url 'autor_excluir' autor.pk %}">Excluir</a>
+        <a class="btn secondary mini" href="{% url 'autor_editar' autor.pk %}">Editar</a>
+        <a class="btn danger mini" href="{% url 'autor_excluir' autor.pk %}">Excluir</a>
       </td>
     </tr>
     {% empty %}

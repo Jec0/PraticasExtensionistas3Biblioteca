@@ -1,12 +1,41 @@
 {% extends "core/base.html" %}
 {% block content %}
-<div class="card">
-  <h1>Bem-vindo, {{ user.username }}</h1>
-  <p style="margin-bottom:1.2rem">Sistema de gestão da biblioteca. Utilize o menu acima para gerenciar o acervo, consultar livros ou entrar em contato com a equipe.</p>
-  <p style="border:1px solid var(--borda);border-left:4px solid var(--azul);border-radius:3px;padding:.8rem 1.2rem;margin-bottom:1.4rem;background:var(--azul-claro)">
-    Acervo atual: <strong>{{ total_livros }}</strong> livro(s) cadastrado(s).
-  </p>
-  <a class="btn" href="{% url 'livro_list' %}">Gerenciar livros</a>
-  <a class="btn secondary" href="{% url 'consulta' %}">Consultar acervo</a>
+<h1>Início</h1>
+{% if config.mensagem_boas_vindas %}
+  <p style="max-width:640px;margin-bottom:1.4rem;color:var(--cinza)">{{ config.mensagem_boas_vindas }}</p>
+{% endif %}
+
+<div class="linha-stats">
+  <div class="stat"><b>{{ total_livros }}</b><span>Livros no acervo</span></div>
+  <div class="stat"><b>{{ total_autores }}</b><span>Autores</span></div>
+  <div class="stat"><b>{{ total_categorias }}</b><span>Categorias</span></div>
+  <div class="stat"><b>{{ total_leitores }}</b><span>Leitores</span></div>
 </div>
+
+{% if minha_fila %}
+  <h2>Próximos da sua fila</h2>
+  <div class="grade-livros">
+    {% for interacao in minha_fila %}
+      {% include "core/_card_livro.html" with livro=interacao.livro interacao=interacao %}
+    {% endfor %}
+  </div>
+{% endif %}
+
+<h2>Adicionados recentemente</h2>
+<div class="grade-livros">
+  {% for livro in recentes %}
+    {% include "core/_card_livro.html" with livro=livro interacao=None %}
+  {% empty %}
+    <p class="vazio">Nenhum livro cadastrado ainda.</p>
+  {% endfor %}
+</div>
+
+{% if populares %}
+  <h2>Mais lidos pelos leitores</h2>
+  <div class="grade-livros">
+    {% for livro in populares %}
+      {% include "core/_card_livro.html" with livro=livro interacao=None %}
+    {% endfor %}
+  </div>
+{% endif %}
 {% endblock %}

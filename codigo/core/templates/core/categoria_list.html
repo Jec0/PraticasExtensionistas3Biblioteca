@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% block title %}Categorias - {{ config.nome }}{% endblock %}
+{% block content %}
+<div class="card">
+  <h1 style="margin-bottom:1rem">Categorias</h1>
+  <p style="margin-bottom:1rem"><a class="btn" href="{% url 'categoria_nova' %}">+ Nova categoria</a></p>
+  <table>
+    <tr><th>Nome</th><th>Livros</th><th></th></tr>
+    {% for categoria in categorias %}
+    <tr>
+      <td>{{ categoria.nome }}</td>
+      <td>{{ categoria.qtd }}</td>
+      <td class="actions">
+        <a class="btn secondary mini" href="{% url 'categoria_editar' categoria.pk %}">Editar</a>
+        <a class="btn danger mini" href="{% url 'categoria_excluir' categoria.pk %}">Excluir</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3">Nenhuma categoria cadastrada.</td></tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

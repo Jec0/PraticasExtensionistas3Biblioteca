@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+{% block title %}Excluir categoria - {{ config.nome }}{% endblock %}
+{% block content %}
+<div class="card" style="max-width:460px">
+  <h1 style="margin-bottom:1rem">Excluir categoria</h1>
+  <p style="margin-bottom:1.2rem">Tem certeza que deseja excluir a categoria <strong>{{ categoria.nome }}</strong>? Os livros não serão excluídos.</p>
+  <form method="post">
+    {% csrf_token %}
+    <button class="btn danger" type="submit">Excluir</button>
+    <a class="btn secondary" href="{% url 'categoria_list' %}">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{# Card de livro para grades. Espera: livro (obrigatório), interacao (opcional) #}
+<a class="card-livro" href="{% url 'livro_detalhe' livro.pk %}">
+  <div class="capa">
+    {% if livro.capa_src %}
+      <img src="{{ livro.capa_src }}" alt="Capa de {{ livro.titulo }}" loading="lazy">
+    {% else %}
+      <div class="capa-ph">
+        <span class="inicial">{{ livro.titulo|first|upper }}</span>
+        <span class="titulo-ph">{{ livro.titulo }}</span>
+      </div>
+    {% endif %}
+    {% if interacao.status %}
+      <span class="selo {{ interacao.status }}">{{ interacao.get_status_display }}</span>
+    {% endif %}
+  </div>
+  <div class="card-livro-info">
+    <strong>{{ livro.titulo }}</strong>
+    <span>{{ livro.autores.all|join:", "|default:"Autor desconhecido" }}</span>
+    {% if livro.nota_media %}
+      <span class="estrelas" title="{{ livro.nota_media|floatformat:1 }} de 5">
+        {% for i in "12345" %}{% if livro.nota_media >= forloop.counter %}★{% else %}<span class="vazia">★</span>{% endif %}{% endfor %}
+      </span>
+    {% endif %}
+  </div>
+</a>

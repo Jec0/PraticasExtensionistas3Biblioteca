@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+{% block title %}Criar conta - {{ config.nome }}{% endblock %}
+{% block content %}
+<div class="card" style="max-width:460px;margin:2rem auto">
+  <h1 style="margin-bottom:1rem">Criar conta de leitor</h1>
+  <p style="font-family:system-ui;font-size:.88rem;color:var(--cinza);margin-bottom:1rem">
+    Com uma conta você consulta o acervo, organiza sua fila de leitura e avalia livros.
+  </p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">Criar conta</button>
+  </form>
+  <p style="margin-top:1rem;font-family:system-ui;font-size:.85rem">
+    Já tem conta? <a href="{% url 'login' %}">Entrar</a>
+  </p>
+</div>
+{% endblock %}

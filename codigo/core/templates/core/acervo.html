@@ -1,0 +1,54 @@
+{% extends "core/base.html" %}
+{% load core_extras %}
+{% block title %}Acervo - {{ config.nome }}{% endblock %}
+{% block content %}
+<h1>Acervo</h1>
+
+<form method="get" class="filtros">
+  <div style="flex:2">
+    <label for="id_q">Buscar</label>
+    <input type="search" id="id_q" name="q" value="{{ q }}" placeholder="Título, autor ou ISBN...">
+  </div>
+  <div>
+    <label for="id_categoria">Categoria</label>
+    <select id="id_categoria" name="categoria">
+      <option value="">Todas</option>
+      {% for c in categorias %}
+        <option value="{{ c.pk }}" {% if categoria_id == c.pk|stringformat:"s" %}selected{% endif %}>{{ c.nome }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="id_ordem">Ordenar por</label>
+    <select id="id_ordem" name="ordem">
+      <option value="titulo" {% if ordem == "titulo" %}selected{% endif %}>Título (A a Z)</option>
+      <option value="recentes" {% if ordem == "recentes" %}selected{% endif %}>Mais recentes</option>
+      <option value="ano" {% if ordem == "ano" %}selected{% endif %}>Ano de publicação</option>
+      <option value="avaliacao" {% if ordem == "avaliacao" %}selected{% endif %}>Melhor avaliados</option>
+    </select>
+  </div>
+  <button class="btn" type="submit">Filtrar</button>
+</form>
+
+<p class="vazio" style="margin-bottom:1rem">{{ pagina.paginator.count }} livro(s) encontrado(s).</p>
+
+<div class="grade-livros">
+  {% for livro in pagina %}
+    {% include "core/_card_livro.html" with livro=livro interacao=minhas|dictkey:livro.pk %}
+  {% empty %}
+    <p class="vazio">Nenhum livro encontrado com esses filtros.</p>
+  {% endfor %}
+</div>
+
+{% if pagina.paginator.num_pages > 1 %}
+  <div class="paginacao">
+    {% if pagina.has_previous %}
+      <a href="?q={{ q|urlencode }}&categoria={{ categoria_id }}&ordem={{ ordem }}&pagina={{ pagina.previous_page_number }}">‹ Anterior</a>
+    {% endif %}
+    <span class="atual">{{ pagina.number }} / {{ pagina.paginator.num_pages }}</span>
+    {% if pagina.has_next %}
+      <a href="?q={{ q|urlencode }}&categoria={{ categoria_id }}&ordem={{ ordem }}&pagina={{ pagina.next_page_number }}">Próxima ›</a>
+    {% endif %}
+  </div>
+{% endif %}
+{% endblock %}
