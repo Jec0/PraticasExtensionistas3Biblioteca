@@ -9,6 +9,7 @@ Sistema web completo para bibliotecas de qualquer porte, com acervo digital, ár
 - João Vitor Chüler Battistella - 447607
 - Jorge Luiz Lopes Polli - 369818
 - Manueli Vitória de Oliveira Cerutti - 412287
+- Pablo Pellizzari Bisollo - 425790
 - Phaola Cristina Panegalli - 402224
 
 
