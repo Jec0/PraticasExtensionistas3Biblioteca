@@ -4,13 +4,7 @@ Sistema web completo para bibliotecas de qualquer porte, com acervo digital, ár
 
 ## Integrantes
 
-- Vinicios Andrei Mensen - 445509
-- Vicenzo Henrique Peruzzo
 - Jorge Luiz Lopes Polli - 369818
-- João Vitor Chüler Battistella - 447607
-- Vinicius Dalpasquale - 412017
-- Joao Fernando Piovezan - 377015
-- Léo Bauer
 
 ## Sobre o projeto
 
