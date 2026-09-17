@@ -4,7 +4,13 @@ Sistema web completo para bibliotecas de qualquer porte, com acervo digital, ár
 
 ## Integrantes
 
+- Gabriel do Amaral Martini - 412830
+- Jaime Luiz Hansen Filho - 294833
+- João Vitor Chüler Battistella - 447607
 - Jorge Luiz Lopes Polli - 369818
+- Manueli Vitória de Oliveira Cerutti - 412287
+- Phaola Cristina Panegalli - 402224
+
 
 ## Sobre o projeto
 
