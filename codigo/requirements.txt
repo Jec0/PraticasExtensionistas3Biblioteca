@@ -1,6 +1,7 @@
 Django>=5.1
 Pillow>=10.0
 gunicorn
+uvicorn
 whitenoise
 dj-database-url
 psycopg2-binary
