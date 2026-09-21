@@ -47,4 +47,4 @@ A aplicação está disponível publicamente através do Render:
 
 ### Limitações
 
-A publicação utiliza os recursos gratuitos disponíveis na plataforma Render. Dessa forma, existem limitações relacionadas aos recursos computacionais e à disponibilidade do ambiente gratuito. Essas limitações são aceitáveis para o objetivo acadêmico do projeto, que consiste na publicação e demonstração da aplicação.
+A aplicação encontra-se hospedada na plataforma Render. Por utilizar a infraestrutura gratuita, o serviço pode entrar em estado de inatividade após períodos sem acesso. Nesse caso, o primeiro acesso pode apresentar um tempo maior de carregamento enquanto a aplicação é reativada.
