@@ -12,6 +12,11 @@ Sistema web completo para bibliotecas de qualquer porte, com acervo digital, ár
 - Pablo Pellizzari Bisollo - 425790
 - Phaola Cristina Panegalli - 402224
 
+## 🌐 Aplicação online
+
+Acesse a aplicação publicada:
+
+**(https://praticasextensionistas3biblioteca.onrender.com/)**
 
 ## Sobre o projeto
 
