@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-development-key")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
-    os.environ.get("RENDER_EXTERNAL_HOSTNAME", ""),
+    os.environ.get("RENDER_EXTERNAL_HOSTNAME", "localhost"),
     "localhost",
     "127.0.0.1",
 ]
@@ -131,7 +131,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Arquivos enviados pelos usuários (logo da biblioteca, capas de livros)
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
