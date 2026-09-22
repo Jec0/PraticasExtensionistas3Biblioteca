@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="700" viewBox="0 0 1240 700">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="620.0" y="40.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="20" fill="#000000" text-anchor="middle" font-weight="bold">DIAGRAMA DE IMPLANTAÇÃO - BIBLIOTECA</text>
+<polygon points="85.0,275.0 99.0,261.0 329.0,261.0 315.0,275.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<polygon points="315.0,275.0 329.0,261.0 329.0,371.0 315.0,385.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<rect x="85.0" y="275.0" width="230.0" height="110.0" rx="0.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<text x="200.0" y="303.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="13" fill="#000000" text-anchor="middle" font-weight="bold">Dispositivo do usuário</text>
+<text x="200.0" y="323.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="11" fill="#666666" text-anchor="middle">navegador web</text>
+<polygon points="450.0,235.0 464.0,221.0 804.0,221.0 790.0,235.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<polygon points="790.0,235.0 804.0,221.0 804.0,391.0 790.0,405.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<rect x="450.0" y="235.0" width="340.0" height="170.0" rx="0.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<text x="620.0" y="263.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="13" fill="#000000" text-anchor="middle" font-weight="bold">Servidor de aplicação</text>
+<text x="620.0" y="283.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="11" fill="#666666" text-anchor="middle">Render · container Linux</text>
+<rect x="490.0" y="325.0" width="260.0" height="56.0" rx="0.0" fill="#cfe0f4" stroke="#656565" stroke-width="1"/>
+<text x="620.0" y="348.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="12" fill="#000000" text-anchor="middle" font-weight="bold">core</text>
+<text x="620.0" y="366.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="11" fill="#333333" text-anchor="middle">Django · Gunicorn · WhiteNoise</text>
+<polygon points="470.0,525.0 484.0,511.0 784.0,511.0 770.0,525.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<polygon points="770.0,525.0 784.0,511.0 784.0,621.0 770.0,635.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<rect x="470.0" y="525.0" width="300.0" height="110.0" rx="0.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<text x="620.0" y="553.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="13" fill="#000000" text-anchor="middle" font-weight="bold">Banco de dados</text>
+<text x="620.0" y="573.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="11" fill="#666666" text-anchor="middle">PostgreSQL gerenciado</text>
+<polygon points="935.0,165.0 949.0,151.0 1179.0,151.0 1165.0,165.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<polygon points="1165.0,165.0 1179.0,151.0 1179.0,261.0 1165.0,275.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<rect x="935.0" y="165.0" width="230.0" height="110.0" rx="0.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<text x="1050.0" y="193.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="13" fill="#000000" text-anchor="middle" font-weight="bold">GitHub</text>
+<text x="1050.0" y="213.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="11" fill="#666666" text-anchor="middle">repositório do projeto</text>
+<polygon points="935.0,375.0 949.0,361.0 1179.0,361.0 1165.0,375.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<polygon points="1165.0,375.0 1179.0,361.0 1179.0,471.0 1165.0,485.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<rect x="935.0" y="375.0" width="230.0" height="110.0" rx="0.0" fill="#ffffff" stroke="#656565" stroke-width="1"/>
+<text x="1050.0" y="403.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="13" fill="#000000" text-anchor="middle" font-weight="bold">Open Library</text>
+<text x="1050.0" y="423.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="11" fill="#666666" text-anchor="middle">API pública de livros</text>
+<line x1="329.0" y1="330.0" x2="450.0" y2="330.0" stroke="#000000" stroke-width="1"/>
+<text x="389.5" y="320.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="11" fill="#333333" text-anchor="middle">«HTTPS»</text>
+<line x1="620.0" y1="405.0" x2="620.0" y2="511.0" stroke="#000000" stroke-width="1"/>
+<text x="696.0" y="462.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="11" fill="#333333" text-anchor="middle">«TCP/IP 5432»</text>
+<line x1="804.0" y1="265.0" x2="935.0" y2="265.0" stroke="#000000" stroke-width="1"/>
+<text x="869.5" y="255.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="11" fill="#333333" text-anchor="middle">«webhook»</text>
+<line x1="804.0" y1="385.0" x2="935.0" y2="385.0" stroke="#000000" stroke-width="1"/>
+<text x="869.5" y="375.0" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" font-size="11" fill="#333333" text-anchor="middle">«HTTPS / JSON»</text>
+</svg>

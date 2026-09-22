@@ -1,6 +1,8 @@
 # Sistema de Gestão de Biblioteca
 
-Sistema web completo para bibliotecas de qualquer porte, com acervo digital, área do leitor e identidade visual totalmente personalizável. Projeto da disciplina de Práticas Extensionistas III.
+Sistema web completo para bibliotecas de qualquer porte, com acervo digital, área do leitor e identidade visual totalmente personalizável.
+
+Projeto desenvolvido nas disciplinas de **Práticas Extensionistas III e IV**. A Prática III entregou a modelagem e o MVP funcional; a Prática IV dá continuidade ao mesmo produto, tratando da arquitetura da aplicação, da arquitetura de implantação, da esteira DevOps e da infraestrutura de publicação.
 
 ## Integrantes
 
@@ -155,12 +157,17 @@ O importador busca capa, autores, ano, número de páginas e ISBN de cada obra, 
 | Camada | Tecnologia |
 |---|---|
 | Linguagem | Python 3.12 |
-| Framework web | Django 5.1 |
-| Banco de dados | SQLite |
+| Framework web | Django 5.x |
+| Banco de dados | SQLite (desenvolvimento) e PostgreSQL (produção) |
+| Servidor de aplicação | Gunicorn (WSGI) |
+| Arquivos estáticos | WhiteNoise |
+| Configuração de banco | dj-database-url (leitura de `DATABASE_URL`) |
 | Imagens | Pillow (upload de logo e capas) |
 | Front-end | HTML e CSS renderizados pelo servidor, sem dependências de JavaScript |
 | Dados do acervo | API pública do Open Library (capas e metadados) |
 | Testes | Django TestCase (16 testes automatizados) |
+| Integração contínua | GitHub Actions |
+| Publicação | Nuvem PaaS (Render) com PostgreSQL gerenciado |
 
 ## Como executar
 
@@ -168,6 +175,8 @@ Requisitos: Python 3.10 ou superior.
 
 ```bash
 cd codigo
+python3 -m venv .venv
+source .venv/bin/activate      # no Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 python manage.py runserver
 ```
@@ -194,6 +203,57 @@ Para rodar os testes automatizados:
 python manage.py test
 ```
 
+## Arquitetura
+
+Os diagramas de arquitetura estão publicados no repositório em formato PNG e SVG (vetorial, para ampliação sem perda).
+
+### Diagrama UML de pacotes — arquitetura da aplicação
+
+Organização interna do sistema em camadas seguindo o padrão MTV do Django, com as dependências entre os pacotes do projeto, o framework, as bibliotecas de terceiros e os serviços externos.
+
+![Diagrama de pacotes](6.%20DiagramaPacotes/DiagramaPacotes.png)
+
+### Diagrama de arquitetura de implantação
+
+Distribuição física da solução: dispositivo do usuário, plataforma de nuvem com o container da aplicação, banco gerenciado, armazenamento de mídia e os serviços externos, com os protocolos de comunicação de cada caminho.
+
+![Diagrama de implantação](7.%20DiagramaImplantacao/DiagramaImplantacao.png)
+
+### Diagrama de arquitetura DevOps
+
+Esteira completa de integração e entrega contínuas, do planejamento ao monitoramento em produção, com o ciclo de realimentação.
+
+![Diagrama DevOps](8.%20DiagramaDevOps/DiagramaDevOps.png)
+
+## Infraestrutura de publicação
+
+A solução é publicada em nuvem no modelo **PaaS**: aplicação em Web Service com Gunicorn, banco **PostgreSQL gerenciado**, arquivos estáticos servidos pelo WhiteNoise e HTTPS emitido e renovado pela plataforma. O código vive no GitHub, que dispara o deploy automático a cada push aprovado na branch `main`.
+
+A descrição completa, o comparativo com as alternativas avaliadas (self-host, IaaS, serverless e outras PaaS), a configuração ativada na plataforma e as limitações conhecidas estão em:
+
+**[9. Infraestrutura/JustificativaInfraestrutura.md](9.%20Infraestrutura/JustificativaInfraestrutura.md)**
+
+O script de build executado pela plataforma é o [build.sh](build.sh):
+
+```bash
+pip install -r requirements.txt
+python manage.py collectstatic --no-input
+python manage.py migrate
+```
+
+Em produção, nenhuma credencial fica no repositório — `SECRET_KEY`, `DEBUG` e `DATABASE_URL` são lidas de variáveis de ambiente em `codigo/biblioteca/settings.py`.
+
+## Integração contínua
+
+O repositório tem uma esteira de CI no GitHub Actions ([.github/workflows/ci.yml](.github/workflows/ci.yml)) que roda a cada push e a cada pull request na branch `main`:
+
+1. Instala as dependências com Python 3.12
+2. Executa `python manage.py check`
+3. Confere se há migrações pendentes não versionadas
+4. Executa os 16 testes automatizados
+
+Um teste reprovado interrompe a esteira antes da publicação.
+
 ## Modelagem
 
 O modelo relacional do banco de dados e os demais diagramas estruturais do projeto estão nas pastas numeradas do repositório:
@@ -206,6 +266,10 @@ O modelo relacional do banco de dados e os demais diagramas estruturais do proje
 | Diagrama de casos de uso | [3. DiagramaCasoUsoGeral/DiagramaUsoGeral.png](3.%20DiagramaCasoUsoGeral/DiagramaUsoGeral.png) |
 | Diagrama de sequência | [4. DiagramaSequencia/Diagrama_de_sequencia.png](4.%20DiagramaSequencia/Diagrama_de_sequencia.png) |
 | Diagrama de atividades | [5. DiaramasAtividades/diagramaDeAtividade.png](5.%20DiaramasAtividades/diagramaDeAtividade.png) |
+| Diagrama de pacotes | [6. DiagramaPacotes/DiagramaPacotes.png](6.%20DiagramaPacotes/DiagramaPacotes.png) |
+| Diagrama de implantação | [7. DiagramaImplantacao/DiagramaImplantacao.png](7.%20DiagramaImplantacao/DiagramaImplantacao.png) |
+| Diagrama DevOps | [8. DiagramaDevOps/DiagramaDevOps.png](8.%20DiagramaDevOps/DiagramaDevOps.png) |
+| Justificativa da infraestrutura | [9. Infraestrutura/JustificativaInfraestrutura.md](9.%20Infraestrutura/JustificativaInfraestrutura.md) |
 
 As entidades do banco estão implementadas como modelos do Django em [codigo/core/models.py](codigo/core/models.py). Além das entidades originais (Usuario, Livro, Autor, Emprestimo), o sistema conta com Categoria, InteracaoLivro (estante e avaliações dos leitores) e ConfiguracaoBiblioteca (personalização visual).
 
@@ -220,3 +284,5 @@ O código fonte está na pasta [codigo/](codigo/):
 - `codigo/core/management/commands/`: comandos de carga do acervo (`seed_acervo` e `importar_livros`)
 - `codigo/core/tests.py`: testes automatizados de navegação, permissões, estante do leitor, avaliações e personalização
 - `codigo/db.sqlite3`: banco de dados já populado
+- `.github/workflows/ci.yml`: esteira de integração contínua
+- `build.sh`: script de build executado na publicação
